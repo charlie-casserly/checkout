@@ -24,7 +24,7 @@ RSpec.describe Checkout do
       end
 
       it 'returns the base price for the basket' do
-        expect(total).to eq(30)
+        expect(checkout.total).to eq(30)
       end
     end
 
@@ -35,7 +35,7 @@ RSpec.describe Checkout do
       end
 
       it 'returns the discounted price for the basket' do
-        expect(total).to eq(10)
+        expect(checkout.total).to eq(10)
       end
 
       context 'and there are other items' do
@@ -44,7 +44,7 @@ RSpec.describe Checkout do
         end
 
         it 'returns the correctly discounted price for the basket' do
-          expect(total).to eq(30)
+          expect(checkout.total).to eq(30)
         end
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe Checkout do
       end
 
       it 'returns the discounted price for the basket' do
-        expect(total).to eq(15)
+        expect(checkout.total).to eq(15)
       end
 
       context 'and there are other discounted items' do
@@ -65,7 +65,7 @@ RSpec.describe Checkout do
         end
 
         it 'returns the correctly discounted price for the basket' do
-          expect(total).to eq(30)
+          expect(checkout.total).to eq(30)
         end
       end
     end
@@ -76,7 +76,7 @@ RSpec.describe Checkout do
       end
 
       it 'returns the discounted price for the basket' do
-        expect(total).to eq(15)
+        expect(checkout.total).to eq(15)
       end
     end
 
@@ -87,7 +87,7 @@ RSpec.describe Checkout do
       end
 
       it 'returns the discounted price for the basket' do
-        expect(total).to eq(150)
+        expect(checkout.total).to eq(150)
       end
     end
 
@@ -98,7 +98,7 @@ RSpec.describe Checkout do
 
       it 'returns the discounted price for the basket' do
         pending 'You need to write the code to satisfy this test'
-        expect(total).to eq(600)
+        expect(checkout.total).to eq(600)
       end
     end
   end
