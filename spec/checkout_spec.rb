@@ -29,19 +29,14 @@ RSpec.describe Checkout do
     end
 
     context 'when a two for 1 applies on apples' do
-      before do
-        checkout.scan(:apple)
-        checkout.scan(:apple)
-      end
+      before { 2.times { checkout.scan(:apple) } }
 
       it 'returns the discounted price for the basket' do
         expect(checkout.total).to eq(10)
       end
 
       context 'and there are other items' do
-        before do
-          checkout.scan(:orange)
-        end
+        before { checkout.scan(:orange) }
 
         it 'returns the correctly discounted price for the basket' do
           expect(checkout.total).to eq(30)
@@ -50,19 +45,14 @@ RSpec.describe Checkout do
     end
 
     context 'when a two for 1 applies on pears' do
-      before do
-        checkout.scan(:pear)
-        checkout.scan(:pear)
-      end
+      before { 2.times { checkout.scan(:pear) } }
 
       it 'returns the discounted price for the basket' do
         expect(checkout.total).to eq(15)
       end
 
       context 'and there are other discounted items' do
-        before do
-          checkout.scan(:banana)
-        end
+        before { checkout.scan(:banana) }
 
         it 'returns the correctly discounted price for the basket' do
           expect(checkout.total).to eq(30)
@@ -71,9 +61,7 @@ RSpec.describe Checkout do
     end
 
     context 'when a half price offer applies on bananas' do
-      before do
-        checkout.scan(:banana)
-      end
+      before { checkout.scan(:banana) }
 
       it 'returns the discounted price for the basket' do
         expect(checkout.total).to eq(15)
@@ -81,10 +69,7 @@ RSpec.describe Checkout do
     end
 
     context 'when a half price offer applies on pineapples restricted to 1 per customer' do
-      before do
-        checkout.scan(:pineapple)
-        checkout.scan(:pineapple)
-      end
+      before { 2.times { checkout.scan(:pineapple) } }
 
       it 'returns the discounted price for the basket' do
         expect(checkout.total).to eq(150)
@@ -92,9 +77,7 @@ RSpec.describe Checkout do
     end
 
     context 'when a buy 3 get 1 free offer applies to mangos' do
-      before do
-        4.times { checkout.scan(:mango) }
-      end
+      before { 4.times { checkout.scan(:mango) } }
 
       it 'returns the discounted price for the basket' do
         pending 'You need to write the code to satisfy this test'
