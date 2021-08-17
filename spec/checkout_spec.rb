@@ -77,10 +77,18 @@ RSpec.describe Checkout do
     end
 
     context 'when a buy 3 get 1 free offer applies to mangos' do
-      before { 4.times { checkout.scan(:mango) } }
+      it 'returns the discounted price for four mangos' do
+        4.times { checkout.scan(:mango) }
+        expect(checkout.total).to eq(600)
+      end
 
-      it 'returns the discounted price for the basket' do
-        pending 'You need to write the code to satisfy this test'
+      it 'returns the discounted price for twelve mangos' do
+        12.times { checkout.scan(:mango) }
+        expect(checkout.total).to eq(1800)
+      end
+
+      it 'doesnt return a discount unless theres at least 4 mangoes' do 
+        3.times { checkout.scan(:mango) }
         expect(checkout.total).to eq(600)
       end
     end
