@@ -69,10 +69,15 @@ RSpec.describe Checkout do
     end
 
     context 'when a half price offer applies on pineapples restricted to 1 per customer' do
-      before { 2.times { checkout.scan(:pineapple) } }
 
-      it 'returns the discounted price for the basket' do
+      it 'returns the discounted price for two pineapples' do
+        2.times { checkout.scan(:pineapple) }
         expect(checkout.total).to eq(150)
+      end
+
+      it 'returns the discounted price for four pineapples' do
+        4.times { checkout.scan(:pineapple) }
+        expect(checkout.total).to eq(350)
       end
     end
 
@@ -87,7 +92,7 @@ RSpec.describe Checkout do
         expect(checkout.total).to eq(1800)
       end
 
-      it 'doesnt return a discount unless theres at least 4 mangoes' do 
+      it 'doesnt return a discount unless there is at least 4 mangos' do 
         3.times { checkout.scan(:mango) }
         expect(checkout.total).to eq(600)
       end

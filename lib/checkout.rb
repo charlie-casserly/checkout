@@ -20,28 +20,27 @@ class Checkout
   private
 
   def total_calculator(item_amounts)
-    total = 0
-    item_amounts.each do |item, count|
-      if item == :apple || item == :pear
-        if (count % 2 == 0)
-          total += prices.fetch(item) * (count / 2)
-        else
-          total += prices.fetch(item) * count
-        end
-      elsif item == :banana || item == :pineapple
-        if item == :pineapple
-          total += (prices.fetch(item) / 2)
-          total += (prices.fetch(item)) * (count - 1)
-        else
-          total += (prices.fetch(item) / 2) * count
-        end
-      elsif item == :mango
-        total += prices.fetch(item) * (count - (count / 4))
-      else
-        total += prices.fetch(item) * count
-      end
-    end
-    total
+    costs_array = item_amounts.map { |item, count| cost_counter(item, count) }
+    costs_array.inject(:+)
   end
 
+  def cost_counter(item, count)
+    if item == :apple || item == :pear
+      if (count % 2 == 0)
+        prices.fetch(item) * (count / 2)
+      else
+        prices.fetch(item) * count
+      end
+    elsif item == :banana || item == :pineapple
+      if item == :pineapple
+        prices.fetch(item) * count - (prices.fetch(item) / 2)
+      else
+        (prices.fetch(item) / 2) * count
+      end
+    elsif item == :mango
+      prices.fetch(item) * (count - (count / 4))
+    else
+      prices.fetch(item) * count
+    end
+  end
 end
