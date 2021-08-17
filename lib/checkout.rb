@@ -14,12 +14,12 @@ class Checkout
   def total
     item_amounts = basket.inject(Hash.new(0)) { |items, item| items[item] += 1; items }
 
-    price_calculator(item_amounts)
+    total_calculator(item_amounts)
   end
 
   private
 
-  def price_calculator(item_amounts)
+  def total_calculator(item_amounts)
     total = 0
     item_amounts.each do |item, count|
       if item == :apple || item == :pear
