@@ -1,9 +1,10 @@
 class Checkout
-  attr_reader :prices
-  private :prices
+  attr_reader :prices, :basket
+  private :prices, :basket
 
   def initialize(prices)
     @prices = prices
+    @basket = []
   end
 
   def scan(item)
@@ -11,9 +12,16 @@ class Checkout
   end
 
   def total
-    total = 0
+    item_amounts = basket.inject(Hash.new(0)) { |items, item| items[item] += 1; items }
 
-    basket.inject(Hash.new(0)) { |items, item| items[item] += 1; items }.each do |item, count|
+    price_calculator(item_amounts)
+  end
+
+  private
+
+  def price_calculator(item_amounts)
+    total = 0
+    item_amounts.each do |item, count|
       if item == :apple || item == :pear
         if (count % 2 == 0)
           total += prices.fetch(item) * (count / 2)
@@ -33,13 +41,7 @@ class Checkout
         total += prices.fetch(item) * count
       end
     end
-
     total
   end
 
-  private
-
-  def basket
-    @basket ||= Array.new
-  end
 end
