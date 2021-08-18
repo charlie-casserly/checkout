@@ -2,11 +2,12 @@ require_relative 'discount'
 require_relative 'items'
 
 class Checkout
-  attr_reader :prices, :basket, :items
+  attr_reader :prices, :basket, :items, :discount
   private :prices, :basket
 
-  def initialize(items = Items.new)
+  def initialize(items = Items.new, discount = Discount.new)
     @items = items
+    @discount = discount
     @basket = []
   end
 
@@ -36,14 +37,14 @@ class Checkout
       end
     elsif item == :banana || item == :pineapple
       if item == :pineapple
-        prices.fetch(item) * count - (prices.fetch(item) / 2)
+        fetch_price(item) * count - (fetch_price(item) / 2)
       else
-        (prices.fetch(item) / 2) * count
+        (fetch_price(item) / 2) * count
       end
     elsif item == :mango
-      prices.fetch(item) * (count - (count / 4))
+      fetch_price(item) * (count - (count / 4))
     else
-      prices.fetch(item) * count
+      fetch_price(item) * count
     end
   end
 
