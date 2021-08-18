@@ -5,7 +5,7 @@ class Discount
     @items = items
   end
 
-  def add_discount(item, discount)
+  def update_discount(item, discount)
     
   end
 end
