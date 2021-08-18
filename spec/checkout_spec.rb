@@ -5,7 +5,7 @@ RSpec.describe Checkout do
   describe '#total' do
     subject(:total) { checkout.total }
 
-    let(:checkout) { Checkout.new(pricing_rules) }
+    let(:checkout) { described_class.new(pricing_rules) }
     let(:pricing_rules) {
       {
         apple: 10,
