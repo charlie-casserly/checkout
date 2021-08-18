@@ -5,16 +5,40 @@ RSpec.describe Checkout do
   describe '#total' do
     subject(:total) { checkout.total }
 
-    let(:checkout) { described_class.new(pricing_rules) }
-    let(:pricing_rules) {
-      {
-        apple: 10,
-        orange: 20,
-        pear: 15,
-        banana: 30,
-        pineapple: 100,
-        mango: 200
-      }
+    let(:checkout) { described_class.new(items) }
+    let(:items) { double(:items, prices: [
+          { 
+            item: :pineapple,
+            price: 100,
+            discount: :first_half_price
+          },
+          {
+            item: :apple,
+            price: 10,
+            discount: :two_for_one
+          },
+          {
+            item: :orange,
+            price: 20,
+            discount: nil
+          },
+          {
+            item: :pear,
+            price: 15,
+            discount: :two_for_one
+          },
+          {
+            item: :banana,
+            price: 30,
+            discount: :half_price
+          },
+          {
+            item: :mango,
+            price: 200,
+            discount: :buy_three_get_one_free
+          }
+        ]
+      )
     }
 
     context 'when no offers apply' do

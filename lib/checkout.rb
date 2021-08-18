@@ -1,11 +1,12 @@
 require_relative 'discount'
+require_relative 'items'
 
 class Checkout
-  attr_reader :prices, :basket
+  attr_reader :prices, :basket, :items
   private :prices, :basket
 
-  def initialize(prices)
-    @prices = prices
+  def initialize(items = Items.new)
+    @items = items
     @basket = []
   end
 
@@ -29,9 +30,9 @@ class Checkout
   def cost_counter(item, count)
     if item == :apple || item == :pear
       if (count % 2 == 0)
-        prices.fetch(item) * (count / 2)
+        fetch_price(item) * (count / 2)
       else
-        prices.fetch(item) * count
+        fetch_price(item) * count
       end
     elsif item == :banana || item == :pineapple
       if item == :pineapple
@@ -44,5 +45,9 @@ class Checkout
     else
       prices.fetch(item) * count
     end
+  end
+
+  def fetch_price(item)
+    items.prices.each { |k, v| return k[:price] if k[:item] == item }
   end
 end

@@ -1,15 +1,17 @@
 class Items
+  attr_reader :prices
+
   def initialize
-    prices = [
+    @prices = [
       { 
         item: :pineapple,
         price: 100,
-        discount: 'first_half_price'
+        discount: :first_half_price
       },
       {
         item: :apple,
         price: 10,
-        discount: 'two_for_one'
+        discount: :two_for_one
       },
       {
         item: :orange,
@@ -19,17 +21,17 @@ class Items
       {
         item: :pear,
         price: 15,
-        discount: 'two_for_one'
+        discount: :two_for_one
       },
       {
         item: :banana,
         price: 30,
-        discount: 'half_price'
+        discount: :half_price
       },
       {
         item: :mango,
         price: 200,
-        discount: 'buy_three_get_one_free'
+        discount: :buy_three_get_one_free
       }
     ]
   end
