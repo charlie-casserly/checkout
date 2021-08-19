@@ -37,10 +37,26 @@ RSpec.describe Discount do
   )
 }
 
-  context 'Updating discount' do 
+  context '#update_discount' do 
     it 'adds the half price discount to oranges' do
       discount.update_discount(:orange, :half_price)
       expect(discount.items.prices[2][:discount]).to eq(:half_price)
+    end
+  end
+
+  context 'applying discount' do
+      let(:database_item) { 
+        {
+          item: :orange,
+          price: 20,
+          discount: nil
+        }
+      }
+
+    context '#half_price' do 
+      it 'reduces the price of the item by half' do
+        expect(discount.half_price(database_item, 6)).to eq(60)
+      end
     end
   end
 end

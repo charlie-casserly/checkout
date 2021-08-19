@@ -29,26 +29,37 @@ class Checkout
   end
 
   def cost_counter(item, count)
-    if item == :apple || item == :pear
-      if (count % 2 == 0)
-        fetch_price(item) * (count / 2)
-      else
-        fetch_price(item) * count
-      end
-    elsif item == :banana || item == :pineapple
-      if item == :pineapple
-        fetch_price(item) * count - (fetch_price(item) / 2)
-      else
-        (fetch_price(item) / 2) * count
-      end
-    elsif item == :mango
-      fetch_price(item) * (count - (count / 4))
-    else
-      fetch_price(item) * count
-    end
+    database_item = fetch_item(item)
+
+    apply_discount(database_item, count)
+
+    # if item == :apple || item == :pear
+    #   if (count % 2 == 0)
+    #     fetch_price(item) * (count / 2)
+    #   else
+    #     fetch_price(item) * count
+    #   end
+    # elsif item == :banana || item == :pineapple
+    #   if item == :pineapple
+    #     fetch_price(item) * count - (fetch_price(item) / 2)
+    #   else
+    #     (fetch_price(item) / 2) * count
+    #   end
+    # elsif item == :mango
+    #   fetch_price(item) * (count - (count / 4))
+    # else
+    #   fetch_price(item) * count
+    # end
   end
 
-  def fetch_price(item)
-    items.prices.each { |k, v| return k[:price] if k[:item] == item }
+  def fetch_item(item)
+    items.prices.each { |k, v| return k if k[:item] == item }
+  end
+
+  def apply_discount(database_item, count)
+    case database_item[:discount]
+      when :half_price
+        discount.half_price(database_item, count)
+    end
   end
 end
