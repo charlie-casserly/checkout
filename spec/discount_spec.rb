@@ -44,7 +44,7 @@ RSpec.describe Discount do
     end
   end
 
-  context 'applying discount' do
+  context '#apply_discount' do
       let(:database_item) { 
         {
           item: :orange,
@@ -53,27 +53,31 @@ RSpec.describe Discount do
         }
       }
 
-    context '#half_price' do 
+    context 'when an item is half price' do 
       it 'reduces the price of the item by half' do
-        expect(discount.half_price(database_item, 6)).to eq(60)
+        database_item[:discount] = :half_price
+        expect(discount.apply_discount(database_item, 6)).to eq(60)
       end
     end
 
     context '#first_half_price' do 
       it 'reduces the price of the first occurrence of the item by half' do
-        expect(discount.first_half_price(database_item, 6)).to eq(110)
+        database_item[:discount] = :first_half_price
+        expect(discount.apply_discount(database_item, 6)).to eq(110)
       end
     end
 
     context '#two_for_one' do 
       it 'grants every other occurrence of an item for free' do
-        expect(discount.two_for_one(database_item, 6)).to eq(60)
+        database_item[:discount] = :two_for_one
+        expect(discount.apply_discount(database_item, 6)).to eq(60)
       end
     end
 
     context '#buy_three_get_one_free' do 
       it 'grants every fourth occurrence of an item for free' do
-        expect(discount.buy_three_get_one_free(database_item, 6)).to eq(100)
+        database_item[:discount] = :buy_three_get_one_free
+        expect(discount.apply_discount(database_item, 6)).to eq(100)
       end
     end
   end

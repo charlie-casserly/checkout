@@ -22,6 +22,8 @@ class Discount
     items.prices.each { |k, v| k[:discount] = discount if k[:item] == item }
   end
 
+  private
+
   def half_price(database_item, count)
     (database_item[:price] / 2) * count
   end
