@@ -5,6 +5,19 @@ class Discount
     @items = items
   end
 
+  def apply_discount(database_item, count)
+    case database_item[:discount]
+      when :half_price
+        half_price(database_item, count)
+      when :first_half_price
+        first_half_price(database_item, count)
+      when :two_for_one
+        two_for_one(database_item, count)
+      when :buy_three_get_one_free
+        buy_three_get_one_free(database_item, count)
+    end
+  end
+
   def update_discount(item, discount)
     items.prices.each { |k, v| k[:discount] = discount if k[:item] == item }
   end
