@@ -58,5 +58,11 @@ RSpec.describe Discount do
         expect(discount.half_price(database_item, 6)).to eq(60)
       end
     end
+
+    context '#first_half_price' do 
+      it 'reduces the price of the first occurrence of the item by half' do
+        expect(discount.first_half_price(database_item, 6)).to eq(110)
+      end
+    end
   end
 end

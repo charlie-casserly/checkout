@@ -12,4 +12,8 @@ class Discount
   def half_price(database_item, count)
     (database_item[:price] / 2) * count
   end
+
+  def first_half_price(database_item, count)
+    database_item[:price] * count - (database_item[:price] / 2)
+  end
 end

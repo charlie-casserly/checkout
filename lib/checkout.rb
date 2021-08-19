@@ -60,6 +60,8 @@ class Checkout
     case database_item[:discount]
       when :half_price
         discount.half_price(database_item, count)
+      when :first_half_price
+        discount.first_half_price(database_item, count)
     end
   end
 end
