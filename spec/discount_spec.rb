@@ -64,5 +64,17 @@ RSpec.describe Discount do
         expect(discount.first_half_price(database_item, 6)).to eq(110)
       end
     end
+
+    context '#two_for_one' do 
+      it 'grants every other occurrence of an item for free' do
+        expect(discount.two_for_one(database_item, 6)).to eq(60)
+      end
+    end
+
+    context '#buy_three_get_one_free' do 
+      it 'grants every fourth occurrence of an item for free' do
+        expect(discount.buy_three_get_one_free(database_item, 6)).to eq(100)
+      end
+    end
   end
 end

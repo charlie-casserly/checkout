@@ -62,6 +62,10 @@ class Checkout
         discount.half_price(database_item, count)
       when :first_half_price
         discount.first_half_price(database_item, count)
+      when :two_for_one
+        discount.two_for_one(database_item, count)
+      when :buy_three_get_one_free
+        discount.buy_three_get_one_free(database_item, count)
     end
   end
 end
