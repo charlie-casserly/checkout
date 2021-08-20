@@ -3,7 +3,7 @@ class Database
 
   def initialize
     @items = [
-      { 
+      {
         item: :pineapple,
         price: 100,
         discount: :first_half_price
@@ -39,13 +39,13 @@ class Database
   def create(item:, price:, discount:)
     items << {
       item: item,
-      price: price, 
+      price: price,
       discount: discount
     }
   end
 
   def update(item:, price: 'default', discount: 'default')
-    items.each do |element| 
+    items.each do |element|
       if element[:item] == item
         element[:price] = price unless price == 'default'
         element[:discount] = discount unless discount == 'default'

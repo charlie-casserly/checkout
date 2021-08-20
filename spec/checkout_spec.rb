@@ -4,40 +4,40 @@ require 'checkout'
 RSpec.describe Checkout do
   describe '#total' do
     let(:checkout) { described_class.new(database) }
-    let(:database) { double(:database, items: [
-          { 
-            item: :pineapple,
-            price: 100,
-            discount: :first_half_price
-          },
-          {
-            item: :apple,
-            price: 10,
-            discount: :two_for_one
-          },
-          {
-            item: :orange,
-            price: 20,
-            discount: nil
-          },
-          {
-            item: :pear,
-            price: 15,
-            discount: :two_for_one
-          },
-          {
-            item: :banana,
-            price: 30,
-            discount: :half_price
-          },
-          {
-            item: :mango,
-            price: 200,
-            discount: :buy_three_get_one_free
-          }
-        ]
-      )
-    }
+    let(:database) do
+      double(:database, items: [
+               {
+                 item: :pineapple,
+                 price: 100,
+                 discount: :first_half_price
+               },
+               {
+                 item: :apple,
+                 price: 10,
+                 discount: :two_for_one
+               },
+               {
+                 item: :orange,
+                 price: 20,
+                 discount: nil
+               },
+               {
+                 item: :pear,
+                 price: 15,
+                 discount: :two_for_one
+               },
+               {
+                 item: :banana,
+                 price: 30,
+                 discount: :half_price
+               },
+               {
+                 item: :mango,
+                 price: 200,
+                 discount: :buy_three_get_one_free
+               }
+             ])
+    end
 
     context 'when no offers apply' do
       before do
@@ -96,7 +96,6 @@ RSpec.describe Checkout do
     end
 
     context 'when a half price offer applies on pineapples restricted to 1 per customer' do
-
       it 'returns the discounted price for two pineapples' do
         2.times { checkout.scan(:pineapple) }
         expect(checkout.total).to eq(150)
@@ -119,7 +118,7 @@ RSpec.describe Checkout do
         expect(checkout.total).to eq(1800)
       end
 
-      it 'doesnt return a discount unless there is at least 4 mangos' do 
+      it 'doesnt return a discount unless there is at least 4 mangos' do
         3.times { checkout.scan(:mango) }
         expect(checkout.total).to eq(600)
       end

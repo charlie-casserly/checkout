@@ -14,7 +14,7 @@ class Checkout
   end
 
   def total
-    item_amounts = basket.inject(Hash.new(0)) { |items, item| items[item] += 1; items }
+    item_amounts = basket.each_with_object(Hash.new(0)) { |item, items| items[item] += 1; }
     total_calculator(item_amounts)
   end
 
@@ -31,6 +31,6 @@ class Checkout
   end
 
   def fetch_item(item)
-    database.items.each { |k, v| return k if k[:item] == item }
+    database.items.each { |k, _v| return k if k[:item] == item }
   end
 end
