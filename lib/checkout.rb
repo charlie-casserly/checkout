@@ -15,17 +15,17 @@ class Checkout
 
   def total
     item_amounts = basket.each_with_object(Hash.new(0)) { |item, items| items[item] += 1; }
-    total_calculator(item_amounts)
+    total_cost_calculator(item_amounts)
   end
 
   private
 
-  def total_calculator(item_amounts)
-    costs_array = item_amounts.map { |item, count| item_price_calculator(item, count) }
+  def total_cost_calculator(item_amounts)
+    costs_array = item_amounts.map { |item, count| item_cost_calculator(item, count) }
     costs_array.inject(:+)
   end
 
-  def item_price_calculator(item, count)
+  def item_cost_calculator(item, count)
     database_item = fetch_item(item)
     database_item[:discount].nil? ? database_item[:price] * count : Discount.apply_discount(database_item, count)
   end
