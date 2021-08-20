@@ -1,5 +1,5 @@
 require_relative 'discount'
-require_relative 'items'
+require_relative 'database'
 
 class Checkout
   attr_reader :prices, :basket, :items, :discount

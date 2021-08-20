@@ -1,11 +1,11 @@
-require 'items'
+require 'database'
 
-RSpec.describe Items do
-  let(:items) { described_class.new }
+RSpec.describe Database do
+  let(:database) { described_class.new }
 
   context '#initialize' do 
-    it 'initializes with @prices instance variable that has six entries of items with their prices and discounts' do
-      expect(items.prices).to eq([
+    it 'initializes with @items instance variable that has six entries of database with their items and discounts' do
+      expect(database.items).to eq([
         { 
           item: :pineapple,
           price: 100,
@@ -41,23 +41,23 @@ RSpec.describe Items do
   end
 
   context '#create' do
-    it 'adds a new record to the items table' do 
-      items.create(item: :grapes, price: 50, discount: nil)
-      expect(items.prices.last[:item]).to eq(:grapes)
+    it 'adds a new record to the database table' do 
+      database.create(item: :grapes, price: 50, discount: nil)
+      expect(database.items.last[:item]).to eq(:grapes)
     end
   end 
 
   context '#update' do 
     it 'updates the item in the database with the parameters passed in' do 
-      items.update(item: :mango, discount: :half_price)
-      expect(items.prices.last[:discount]).to eq(:half_price)
+      database.update(item: :mango, discount: :half_price)
+      expect(database.items.last[:discount]).to eq(:half_price)
     end
   end 
 
   context '#delete' do 
     it 'deletes the entry that matches the item parameter' do 
-      items.delete(:pineapple)
-      expect(items.prices).to_not include(
+      database.delete(:pineapple)
+      expect(database.items).to_not include(
         { 
           item: :pineapple,
           price: 100,

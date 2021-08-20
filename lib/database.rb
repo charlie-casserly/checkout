@@ -1,8 +1,8 @@
-class Items
-  attr_reader :prices
+class Database
+  attr_reader :items
 
   def initialize
-    @prices = [
+    @items = [
       { 
         item: :pineapple,
         price: 100,
@@ -37,7 +37,7 @@ class Items
   end
 
   def create(item:, price:, discount:)
-    prices << {
+    items << {
       item: item,
       price: price, 
       discount: discount
@@ -45,7 +45,7 @@ class Items
   end
 
   def update(item:, price: 'default', discount: 'default')
-    prices.each do |element| 
+    items.each do |element| 
       if element[:item] == item
         element[:price] = price unless price == 'default'
         element[:discount] = discount unless discount == 'default'
@@ -54,8 +54,6 @@ class Items
   end
 
   def delete(item)
-    prices.each_with_index do |element, index|
-      prices.delete_at(index) if element[:item] == item
-    end
+    items.each_with_index { |element, index| items.delete_at(index) if element[:item] == item }
   end
 end
