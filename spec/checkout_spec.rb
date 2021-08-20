@@ -3,8 +3,8 @@ require 'checkout'
 
 RSpec.describe Checkout do
   describe '#total' do
-    let(:checkout) { described_class.new(items) }
-    let(:items) { double(:items, prices: [
+    let(:checkout) { described_class.new(database) }
+    let(:database) { double(:database, items: [
           { 
             item: :pineapple,
             price: 100,
@@ -53,7 +53,7 @@ RSpec.describe Checkout do
     context 'when a two for 1 applies on apples' do
       before { 2.times { checkout.scan(:apple) } }
 
-      it 'returns the discounted price for the basket' do
+      it 'returns the discounted price for two apples' do
         expect(checkout.total).to eq(10)
       end
 
@@ -63,6 +63,11 @@ RSpec.describe Checkout do
         it 'returns the correctly discounted price for the basket' do
           expect(checkout.total).to eq(30)
         end
+      end
+
+      it 'returns the discounted price for nine apples' do
+        7.times { checkout.scan(:apple) }
+        expect(checkout.total).to eq(50)
       end
     end
 

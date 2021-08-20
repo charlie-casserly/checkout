@@ -2,11 +2,11 @@ require_relative 'discount'
 require_relative 'database'
 
 class Checkout
-  attr_reader :prices, :basket, :items, :discount
+  attr_reader :prices, :basket, :database, :discount
   private :prices, :basket
 
-  def initialize(items = Items.new)
-    @items = items
+  def initialize(database = Database.new)
+    @database = database
     @basket = []
   end
 
@@ -32,6 +32,6 @@ class Checkout
   end
 
   def fetch_item(item)
-    items.prices.each { |k, v| return k if k[:item] == item }
+    database.items.each { |k, v| return k if k[:item] == item }
   end
 end

@@ -21,7 +21,7 @@ class Discount
     end
 
     def two_for_one(database_item, count)
-      count.even? ? database_item[:price] * (count / 2) : database_item[:price] * count
+      count.even? ? database_item[:price] * (count / 2) : database_item[:price] * (count / 2) + database_item[:price]
     end
 
     def buy_three_get_one_free(database_item, count)
