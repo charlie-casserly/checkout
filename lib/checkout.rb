@@ -2,8 +2,7 @@ require_relative 'discount'
 require_relative 'database'
 
 class Checkout
-  attr_reader :prices, :basket, :database, :discount
-  private :prices, :basket
+  attr_reader :basket, :database, :discount
 
   def initialize(database = Database.new)
     @database = database
