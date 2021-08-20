@@ -21,11 +21,11 @@ class Checkout
   private
 
   def total_calculator(item_amounts)
-    costs_array = item_amounts.map { |item, count| cost_counter(item, count) }
+    costs_array = item_amounts.map { |item, count| item_price_calculator(item, count) }
     costs_array.inject(:+)
   end
 
-  def cost_counter(item, count)
+  def item_price_calculator(item, count)
     database_item = fetch_item(item)
     database_item[:discount].nil? ? database_item[:price] * count : Discount.apply_discount(database_item, count)
   end
