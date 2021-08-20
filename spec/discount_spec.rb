@@ -53,7 +53,7 @@ RSpec.describe Discount do
         }
       }
 
-    context 'when an item is half price' do 
+    context '#half_price' do 
       it 'reduces the price of the item by half' do
         database_item[:discount] = :half_price
         expect(discount.apply_discount(database_item, 6)).to eq(60)
