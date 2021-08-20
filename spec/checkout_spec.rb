@@ -3,8 +3,6 @@ require 'checkout'
 
 RSpec.describe Checkout do
   describe '#total' do
-    subject(:total) { checkout.total }
-
     let(:checkout) { described_class.new(items) }
     let(:items) { double(:items, prices: [
           { 

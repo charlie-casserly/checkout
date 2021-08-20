@@ -17,7 +17,6 @@ class Checkout
 
   def total
     item_amounts = basket.inject(Hash.new(0)) { |items, item| items[item] += 1; items }
-
     total_calculator(item_amounts)
   end
 
