@@ -14,10 +14,6 @@ class Discount
     end
   end
 
-  def update_discount(item, discount)
-    items.prices.each { |k, v| k[:discount] = discount if k[:item] == item }
-  end
-
   private
 
   def half_price(database_item, count)

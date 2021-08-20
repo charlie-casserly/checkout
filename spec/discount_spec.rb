@@ -37,13 +37,6 @@ RSpec.describe Discount do
   )
 }
 
-  context '#update_discount' do 
-    it 'adds the half price discount to oranges' do
-      discount.update_discount(:orange, :half_price)
-      expect(discount.items.prices[2][:discount]).to eq(:half_price)
-    end
-  end
-
   context '#apply_discount' do
       let(:database_item) { 
         {
