@@ -5,9 +5,8 @@ class Checkout
   attr_reader :prices, :basket, :items, :discount
   private :prices, :basket
 
-  def initialize(items = Items.new, discount = Discount.new(items))
+  def initialize(items = Items.new)
     @items = items
-    @discount = discount
     @basket = []
   end
 
@@ -29,7 +28,7 @@ class Checkout
 
   def cost_counter(item, count)
     database_item = fetch_item(item)
-    database_item[:discount].nil? ? database_item[:price] * count : discount.apply_discount(database_item, count)
+    database_item[:discount].nil? ? database_item[:price] * count : Discount.apply_discount(database_item, count)
   end
 
   def fetch_item(item)
