@@ -38,27 +38,27 @@ Item list:
         Discount: Buy three get one free
 
 ### Scanning an item
-* `*checkout.scan(item)*`
+* `checkout.scan(item)`
 
    Examples:
 
-   `*checkout.scan(:apple)*` - adds an apple to the basket
+   `checkout.scan(:apple)` - adds an apple to the basket
 
-   `*checkout.scan(:mango)*` - adds a mango to the basket
+   `checkout.scan(:mango)` - adds a mango to the basket
 
 ### Updating a discount
-* `*checkout.database.update(item:, column:, value:)*`
+*  `checkout.database.update(item:, column:, value:)`
 
    Example:
 
-   `*checkout.database.update(item: :orange, column: :discount, value: :half_price)*` - updates the record for oranges to give oranges a discount of half price.
+   `checkout.database.update(item: :orange, column: :discount, value: :half_price)` - updates the record for oranges to give oranges a discount of half price.
 
 ### Getting the total cost of a basket
-* `*checkout.total*`
+* `checkout.total`
 
    Example:
 
-   `*checkout.total*` - returns the total cost of a basket with all discounts for items included.
+   `checkout.total` - returns the total cost of a basket with all discounts for items included.
 
 ## Notes from candidate
 
