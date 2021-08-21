@@ -44,11 +44,10 @@ class Database
     }
   end
 
-  def update(item:, price: 'default', discount: 'default')
-    items.each do |element|
-      if element[:item] == item
-        element[:price] = price unless price == 'default'
-        element[:discount] = discount unless discount == 'default'
+  def update(item:, column:, value:)
+    items.each do |record|
+      if record[:item] == item
+        record[column] = value
       end
     end
   end

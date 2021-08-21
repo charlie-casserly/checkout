@@ -49,7 +49,7 @@ RSpec.describe Database do
 
   context '#update' do
     it 'updates the item in the database with the parameters passed in' do
-      database.update(item: :mango, discount: :half_price)
+      database.update(item: :mango, column: :discount, value: :half_price)
       expect(database.items.last[:discount]).to eq(:half_price)
     end
   end

@@ -18,7 +18,7 @@ RSpec.describe 'Feature' do
     end
 
     it 'adds up the total cost of a basket where 5 of every fruit has gone through #scan and oranges discount has been updated to half price' do
-      checkout.database.update(item: :orange, discount: :half_price)
+      checkout.database.update(item: :orange, column: :discount, value: :half_price)
       5.times do
         checkout.scan('pineapple')
         checkout.scan('apple')
