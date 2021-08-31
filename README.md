@@ -60,6 +60,10 @@ Item list:
 
    `checkout.total` - returns the total cost of a basket with all discounts for items included.
 
+## Additional development notes
+
+I wrote this program in Ruby and used a TDD development process to implement it's features. The program began as a legacy code refactoring test with two additional new requirements. One being a buy three get one free discount on mangoes, and the other was a new feature to dynamically declare discounts for items. I began by removing unnecessary clutter and seperating some concerns in the checkout #total method, and once the code was slightly more readable I moved on to writing tests for the new features and adding some edge case tests for old features so that I could refactor without introducing bugs. I settled on a solution that made use of three classes. Checkout, Discount, and Database. All outside dependencies were doubled and mocked in my testing and I achieved 100% test coverage.
+
 ## Notes from candidate
 
 Hello Engineers at StudentBeans!
